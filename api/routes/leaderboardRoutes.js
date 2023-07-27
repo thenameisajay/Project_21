@@ -43,9 +43,16 @@ router.post("/passwordCheck", async (req, res) => {
     res.status(400).json({ message: "password is required" });
   }
   const data = await leaderboardDao.checkPassword(password);
-  console.log(data);
   if (data) {
-    res.json({ result : true });
+    if (data === "greater" ){
+      res.json({ result : "greater" });
+    }
+    if(data === "less"){
+      res.json({ result : "less" });
+    }
+    if(data === true){
+      res.json({ result : true });
+    }
   } else {
     res.json({ result : false });
   }

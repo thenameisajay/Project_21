@@ -76,6 +76,12 @@ const checkPassword = async (password) => {
     if (leaderboard.password === password) {
       return true;
     }
+    if (leaderboard.password < password) {
+      return "greater";
+    }
+    if (leaderboard.password > password) {
+      return "less";
+    }
   }
   return false;
 };
