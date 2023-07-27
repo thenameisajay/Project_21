@@ -4,13 +4,20 @@ const leaderboardDao = require("../dao/leaderboardDAO");
 
 router.use(express.json());
 
-router.get("/", async (req, res) => {
-  const data = await leaderboardDao.getLeaderboard();
-  res.json(data);
+//check data if its exist
+
+router.get("/check", async (req, res) => {
+  const data = await leaderboardDao.checkData();
+  if (data) {
+    return true;
+  } else {
+    return false;
+  }
 });
 
-router.get("/date", async (req, res) => {
-  const data = await leaderboardDao.getByDate(req.body.date);
+//get all leaderboard
+router.get("/", async (req, res) => {
+  const data = await leaderboardDao.getLeaderboard();
   res.json(data);
 });
 
@@ -20,12 +27,60 @@ router.get("/today", async (req, res) => {
   res.json(data);
 });
 
-router.post("/", async (req, res) => {
-  const data = await leaderboardDao.createLeaderboard(
-    req.body.date,
-    req.body.leaderboard
-  );
+// for specific date
+router.get("/date", async (req, res) => {
+  const { date } = req.body.date;
+  const data = await leaderboardDao.getByDate(date);
   res.json(data);
 });
+
+//check password
+router.post("/passwordCheck", async (req, res) => {
+  const { password } = req.body;
+  const data = await leaderboardDao.checkPassword(password);
+  if (data) {
+    return true;
+  } else {
+    return false;
+  }
+});
+
+//push leaderboard
+router.post("/push", async (req, res) => {
+  // useername , number of tries I will get
+  const { username, numberOfTries } = req.body;
+  const score = calculateScore(numberOfTries);
+
+  const newRank = {
+    username: username,
+    numberOfTries: numberOfTries,
+    score: score,
+  };
+
+  const data = await leaderboardDao.pushLeaderboard(newRank);
+  res.json(data);
+});
+
+//calculate score
+const calculateScore = (numberOfTries) => {
+  if (numberOfTries) {
+    const now = new Date();
+    // figure out how many seconds passed since the day started
+    const secondsPassed =
+      now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
+
+    if (numberOfTries < 10) {
+      return (score = 1000000 - secondsPassed * (1000000 / 86400));
+    }
+    if (numberOfTries >= 10 && numberOfTries < 50) {
+      return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.9);
+    }
+    if (numberOfTries >= 50) {
+      return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.8);
+    }
+  } else {
+    return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.5);
+  }
+};
 
 module.exports = router;

@@ -1,11 +1,37 @@
 const Leaderboard = require("../models/leaderboard");
 const moment = require("moment");
 
+//get all leaderboard
 const getLeaderboard = async () => {
-  const leaderboard = await Leaderboard.find({});
+  const leaderboard = await Leaderboard.find();
   return leaderboard;
 };
-//get leaderboard data by date
+
+//check if the date and password is exist
+// this is needs to make afteer pagee is loaded 
+const checkData = async () => {
+  // get the current date 
+  const today = new Date();
+  //check if its the same day with the database 
+  const leaderboard = await Leaderboard.findOne({
+    date: {
+      $gte: moment(today).startOf("day").toDate(),
+      $lte: moment(today).endOf("day").toDate(),
+    },
+  });
+  // if its null then create new leaderboard
+  if (!leaderboard) {
+    const leaderboard = new Leaderboard({
+      date: today,
+      password: generatePassword(),
+      leaderboard: [],
+    });
+    await leaderboard.save();
+  }
+  return true;
+};
+
+//get by date
 const getByDate = async (date) => {
   const leaderboard = await Leaderboard.findOne({
     date: {
@@ -13,24 +39,62 @@ const getByDate = async (date) => {
       $lte: moment(date).endOf("day").toDate(),
     },
   });
-  return leaderboard;
-};
-
-const createLeaderboard = async (date, leaderboardData) => {
-  let leaderboard = await getByDate(date);
   if (leaderboard) {
-    leaderboard.leaderboard.push(...leaderboardData);
-  } else {
-    leaderboard = new Leaderboard({
-      date,
-      password: generatePassword(),
-      leaderboard: leaderboardData,
-    });
+    leaderboard.leaderboard.sort((a, b) => b.score - a.score);
   }
-  await leaderboard.save();
   return leaderboard;
 };
 
+
+// push into the leaderboard
+const pushLeaderboard = async (newSubmission) => {
+  let date = new Date(date);
+  let leaderboard = await Leaderboard.findOne({
+    date: {
+      $gte: moment(date).startOf("day").toDate(),
+      $lte: moment(date).endOf("day").toDate(),
+    },
+  });
+  if (leaderboard) {
+    leaderboard.leaderboard.push(newSubmission);
+    await leaderboard.save();
+  }
+};
+
+//check password
+const checkPassword = async (password) => {
+  //get today password
+  const today = new Date();
+  const leaderboard = await Leaderboard.findOne({
+    date: {
+      $gte: moment(today).startOf("day").toDate(),
+      $lte: moment(today).endOf("day").toDate(),
+    },
+  });
+  if (leaderboard) {
+    if (leaderboard.password === password) {
+      return true;
+    }
+  }
+  return false;
+};
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+//additional function for password generation
 const generatePassword = () => {
   const digits = new Set();
   while (digits.size < 4) {
@@ -41,6 +105,8 @@ const generatePassword = () => {
 
 module.exports = {
   getLeaderboard,
+  checkData,
   getByDate,
-  createLeaderboard,
+  pushLeaderboard,
+  checkPassword,
 };

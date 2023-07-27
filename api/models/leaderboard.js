@@ -9,7 +9,6 @@ const leaderboardSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-
   leaderboard: [{
     username: {
       type: String,
