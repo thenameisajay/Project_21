@@ -39,11 +39,15 @@ router.get("/date", async (req, res) => {
 //check password
 router.post("/passwordCheck", async (req, res) => {
   const { password } = req.body;
+  if (password === undefined) {
+    res.status(400).json({ message: "password is required" });
+  }
   const data = await leaderboardDao.checkPassword(password);
+  console.log(data);
   if (data) {
-    return true;
+    res.json({ result : true });
   } else {
-    return false;
+    res.json({ result : false });
   }
 });
 
@@ -51,7 +55,7 @@ router.post("/passwordCheck", async (req, res) => {
 router.post("/push", async (req, res) => {
   // useername , number of tries I will get
   const { username, numberOfTries } = req.body;
-  const score = calculateScore(numberOfTries);
+  const score = Math.floor(calculateScore(numberOfTries));
 
   const newRank = {
     username: username,

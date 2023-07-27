@@ -48,7 +48,7 @@ const getByDate = async (date) => {
 
 // push into the leaderboard
 const pushLeaderboard = async (newSubmission) => {
-  let date = new Date(date);
+  let date = new Date();
   let leaderboard = await Leaderboard.findOne({
     date: {
       $gte: moment(date).startOf("day").toDate(),
@@ -71,6 +71,7 @@ const checkPassword = async (password) => {
       $lte: moment(today).endOf("day").toDate(),
     },
   });
+  password = parseInt(password);
   if (leaderboard) {
     if (leaderboard.password === password) {
       return true;
