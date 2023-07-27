@@ -17,3 +17,6 @@ use project_21
 show collections
 db.commectionname.find() 
 
+## delete database
+db.dropDatabase()
+
