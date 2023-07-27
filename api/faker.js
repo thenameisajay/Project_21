@@ -6,6 +6,14 @@ const moment = require("moment");
 
 const today = new Date();
 
+const generatePassword = () => {
+  const digits = new Set();
+  while (digits.size < 4) {
+    digits.add(Math.floor(Math.random() * 10));
+  }
+  return Array.from(digits).join("");
+};
+
 connectDB()
   .then(async () => {
     console.log("MongoDB connected successfully");
@@ -27,10 +35,11 @@ connectDB()
       });
       if (leaderboard) {
         leaderboard.leaderboard.push(fakeUser);
-        console.log("pushed : "+ fakeUser.username);
+        console.log("pushed : " + fakeUser.username);
       } else {
         leaderboard = new Leaderboard({
           date: today,
+          password: generatePassword(),
           leaderboard: fakeUser,
         });
       }

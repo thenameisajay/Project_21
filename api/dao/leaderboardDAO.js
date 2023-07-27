@@ -23,11 +23,20 @@ const createLeaderboard = async (date, leaderboardData) => {
   } else {
     leaderboard = new Leaderboard({
       date,
+      password: generatePassword(),
       leaderboard: leaderboardData,
     });
   }
   await leaderboard.save();
   return leaderboard;
+};
+
+const generatePassword = () => {
+  const digits = new Set();
+  while (digits.size < 4) {
+    digits.add(Math.floor(Math.random() * 10));
+  }
+  return Array.from(digits).join("");
 };
 
 module.exports = {

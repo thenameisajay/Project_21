@@ -5,6 +5,11 @@ const leaderboardSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  password: {
+    type: Number,
+    required: true,
+  },
+
   leaderboard: [{
     username: {
       type: String,
