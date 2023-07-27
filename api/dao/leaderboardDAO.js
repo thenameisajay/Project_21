@@ -77,10 +77,10 @@ const checkPassword = async (password) => {
       return true;
     }
     if (leaderboard.password < password) {
-      return "greater";
+      return 1;
     }
     if (leaderboard.password > password) {
-      return "less";
+      return -1;
     }
   }
   return false;

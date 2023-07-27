@@ -44,11 +44,13 @@ router.post("/passwordCheck", async (req, res) => {
   }
   const data = await leaderboardDao.checkPassword(password);
   if (data) {
-    if (data === "greater" ){
-      res.json({ result : "greater" });
+    if (data === 1 ){
+      //for more
+      res.json({ result : 1 });
     }
-    if(data === "less"){
-      res.json({ result : "less" });
+    if(data === -1){
+      //for less
+      res.json({ result : -1});
     }
     if(data === true){
       res.json({ result : true });
