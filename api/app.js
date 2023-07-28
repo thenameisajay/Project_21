@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const express = require("express");
 const connectDB = require("./database/connection");
 const leaderboardRoutes = require("./routes/leaderboardRoutes");

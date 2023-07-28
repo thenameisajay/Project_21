@@ -1,6 +1,9 @@
+const dotenv = require('dotenv')
+dotenv.config()
+
 module.exports = {
   database: {
-    url: "mongodb://localhost:27017/project_21",
+    url: process.env.DATABASE_URL,
   },
   server: {
     port: process.env.PORT || 3000,
