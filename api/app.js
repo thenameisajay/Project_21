@@ -21,7 +21,7 @@ connectDB()
   .then(() => {
     console.log("MongoDB connected successfully");
     // Start the server
-    const PORT = config.server.port;
+    const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
