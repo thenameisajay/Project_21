@@ -6,14 +6,14 @@ In our Number Guessing Game, you have the chance to test your intuition and gues
 
 Your score is calculated based on two factors: the number of attempts you make to guess the correct number and the time you take to crack the code. The quicker you guess with fewer attempts, the higher your score will be!
 
-### 1-  Number of Tries:
+### 1)  Number of Tries:
 <ul>
 <li>If you manage to guess the number in less than 10 tries, you'll be rewarded with a higher score.</li>
 <li>If it takes you between 10 and 49 tries, you'll still get a good score, but it will be slightly lower.</li>
 <li>For 50 or more tries, the score will be lower than the above cases. </li>
 </ul>
 
-### 2 - Time Taken:
+### 2) Time Taken:
 
 <ul>
 <li>The game is exciting, but we also value your time. The quicker you find the correct number, the more points you'll earn.</li>
@@ -35,12 +35,8 @@ The scoring formula is designed to balance the importance of both factors - numb
 <li>If it takes you 50 or more tries, your score will be 80% of the value obtained in the first case.</li>
 </ul>
 
-## Special Scenarios:
-<ul>
-<li>
-In case you cannot find the correct number, don't worry! You'll still receive a base score that considers the time elapsed from the start of the day until the game ends. This way, everyone gets rewarded for participating.
-</li>
-</ul>
+
 Remember, the leaderboard is updated daily, so you have a fresh chance to make it to the top every day!
 
+<br>
 Best of luck, and may the odds be in your favor!
