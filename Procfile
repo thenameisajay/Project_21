@@ -1,1 +1,2 @@
-web: node api/app.js
+web: buildpacks:node api/app.js
+
