@@ -12,12 +12,15 @@ Your score is calculated based on two factors: the number of attempts you make t
 <li>If it takes you between 10 and 49 tries, you'll still get a good score, but it will be slightly lower.</li>
 <li>For 50 or more tries, the score will be lower than the above cases. </li>
 </ul>
+
 ### 2 - Time Taken:
+
 <ul>
 <li>The game is exciting, but we also value your time. The quicker you find the correct number, the more points you'll earn.</li>
 <li>We measure the time from the start of the day (00:00:00) until you successfully guess the number.</li>
 </ul>
-# Why is Time a Factor?
+
+## Why is Time a Factor?
 
 We believe that quick thinking and sharp instincts deserve to be rewarded! By incorporating the time element, we encourage players to make accurate guesses swiftly and efficiently. This adds an extra layer of excitement to the game and emphasizes the importance of making confident choices.
 
@@ -31,7 +34,8 @@ The scoring formula is designed to balance the importance of both factors - numb
 
 <li>If it takes you 50 or more tries, your score will be 80% of the value obtained in the first case.</li>
 </ul>
-# Special Scenarios:
+
+## Special Scenarios:
 <ul>
 <li>
 In case you cannot find the correct number, don't worry! You'll still receive a base score that considers the time elapsed from the start of the day until the game ends. This way, everyone gets rewarded for participating.
