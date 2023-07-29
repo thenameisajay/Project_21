@@ -7,7 +7,6 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.json());
 
 //check data if its exist
-
 router.get("/check", async (req, res) => {
   const data = await leaderboardDao.checkData();
   if (data) {
@@ -28,6 +27,7 @@ router.get("/today", async (req, res) => {
   const data = await leaderboardDao.getByDate(new Date());
   res.json(data);
 });
+
 
 // for specific date
 router.get("/date", async (req, res) => {
@@ -63,8 +63,7 @@ router.post("/passwordCheck", async (req, res) => {
 //push leaderboard
 router.post("/push", async (req, res) => {
   // useername , number of tries I will get
-  const { username, numberOfTries } = req.body;
-  const score = Math.floor(calculateScore(numberOfTries));
+  const { username, numberOfTries, score } = req.body;
 
   const newRank = {
     username: username,
@@ -75,6 +74,14 @@ router.post("/push", async (req, res) => {
   const data = await leaderboardDao.pushLeaderboard(newRank);
   res.json(data);
 });
+
+//show score
+router.post("/score", async (req, res) => {
+  const { numberOfTries } = req.body;
+  const score = Math.floor(calculateScore(numberOfTries));
+  res.json({ score: score });
+});
+
 
 //calculate score
 const calculateScore = (numberOfTries) => {
