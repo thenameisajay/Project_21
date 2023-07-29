@@ -42,6 +42,10 @@ const getByDate = async (date) => {
   if (leaderboard) {
     leaderboard.leaderboard.sort((a, b) => b.score - a.score);
   }
+  // sorting only top 10
+  if (leaderboard.leaderboard.length > 10) {
+    leaderboard.leaderboard = leaderboard.leaderboard.slice(0, 10);
+  }
   return leaderboard;
 };
 
