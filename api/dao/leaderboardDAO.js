@@ -89,6 +89,12 @@ const checkPassword = async (password) => {
   }
   return false;
 };
+
+//return date
+const getDate = async () => {
+  const today = new Date();
+  return today;
+};
  
 
 
@@ -120,4 +126,6 @@ module.exports = {
   getByDate,
   pushLeaderboard,
   checkPassword,
+  getDate,
+  
 };

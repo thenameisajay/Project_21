@@ -82,6 +82,19 @@ router.post("/score", async (req, res) => {
   res.json({ score: score });
 });
 
+//getDate from database js
+router.get("/getdate1", async (req, res) => {
+  const data = await leaderboardDao.getDate();
+  res.json(data);
+});
+
+//get date from node app
+router.get("/getdate2", async (req, res) => {
+  const today = new Date();
+  res.json(today);
+});
+
+
 
 //calculate score
 const calculateScore = (numberOfTries) => {
