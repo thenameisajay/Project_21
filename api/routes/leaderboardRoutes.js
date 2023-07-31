@@ -3,6 +3,7 @@ const router = express.Router();
 const leaderboardDao = require("../dao/leaderboardDAO");
 const bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({ extended: false }));
+const { faker } = require("@faker-js/faker");
 
 router.use(express.json());
 
@@ -10,6 +11,19 @@ router.use(express.json());
 router.get("/check", async (req, res) => {
   const data = await leaderboardDao.checkData();
   if (data) {
+    const checkleaderboard = await leaderboardDao.getByDate(new Date());
+    if (checkleaderboard.leaderboard.length === 0) {
+      for (let i = 0; i < 5; i++) {
+        const newRank = {
+          username: faker.internet.userName(),
+          numberOfTries: 100,
+          score: Math.floor(Math.random() * 300000) + 100000,
+        };
+
+        const data = await leaderboardDao.pushLeaderboard(newRank);
+      }
+    }
+
     return true;
   } else {
     return false;
@@ -28,7 +42,6 @@ router.get("/today", async (req, res) => {
   res.json(data);
 });
 
-
 // for specific date
 router.get("/date", async (req, res) => {
   const { date } = req.body.date;
@@ -44,19 +57,19 @@ router.post("/passwordCheck", async (req, res) => {
   }
   const data = await leaderboardDao.checkPassword(password);
   if (data) {
-    if (data === 1 ){
+    if (data === 1) {
       //for more
-      res.json({ result : 1 });
+      res.json(1);
     }
-    if(data === -1){
+    if (data === -1) {
       //for less
-      res.json({ result : -1});
+      res.json(-1);
     }
-    if(data === true){
-      res.json({ result : true });
+    if (data === true) {
+      res.json(0);
     }
   } else {
-    res.json({ result : false });
+    res.json({ message: "somethin went wrong" });
   }
 });
 
@@ -79,7 +92,7 @@ router.post("/push", async (req, res) => {
 router.post("/score", async (req, res) => {
   const { numberOfTries } = req.body;
   const score = Math.floor(calculateScore(numberOfTries));
-  res.json({ score: score });
+  res.json({ score });
 });
 
 //getDate from database js
@@ -93,8 +106,6 @@ router.get("/getdate2", async (req, res) => {
   const today = new Date();
   res.json(today);
 });
-
-
 
 //calculate score
 const calculateScore = (numberOfTries) => {

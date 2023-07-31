@@ -19,7 +19,7 @@ connectDB()
     console.log("MongoDB connected successfully");
 
     for (let i = 0; i < 10; i++) {
-      const score = Math.floor(Math.random() * 1000000) + 1;
+      const score = Math.floor(Math.random() * 100000) + 1;
       const numberOfTries = Math.floor(Math.random() * 100) + 1;
       const fakeUser = {
         username: faker.internet.userName(),
