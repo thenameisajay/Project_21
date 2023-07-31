@@ -92,7 +92,7 @@ router.post("/push", async (req, res) => {
 router.post("/score", async (req, res) => {
   const { numberOfTries } = req.body;
   const score = Math.floor(calculateScore(numberOfTries));
-  res.json({ score });
+  res.json(score);
 });
 
 //getDate from database js
