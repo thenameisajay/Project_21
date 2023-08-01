@@ -51,9 +51,9 @@ Best of luck, and may the odds be in your favor!
 
 ## Authors 
  <ul>
- <li>Furkan T </li>
+ <li>Furkan Tekinay </li>
  <li> Ajay Pradeep Mahadeven</li>
  </ul>
 
-
- 
+## LICENSE 
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
