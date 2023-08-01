@@ -30,6 +30,7 @@ Your score is calculated based on two factors: the number of attempts you make t
 
 We believe that quick thinking and sharp instincts deserve to be rewarded! By incorporating the time element, we encourage players to make accurate guesses swiftly and efficiently. This adds an extra layer of excitement to the game and emphasizes the importance of making confident choices.
 
+
 ## How the Time Component Affects Your Score:
 
 The scoring formula is designed to balance the importance of both factors - number of tries and time taken. Here's how it works:
@@ -46,3 +47,13 @@ Remember, the leaderboard is updated daily, so you have a fresh chance to make i
 
 <br>
 Best of luck, and may the odds be in your favor!
+
+
+## Authors 
+ <ul>
+ <li>Furkan T </li>
+ <li> Ajay Pradeep Mahadeven</li>
+ </ul>
+
+
+ 
