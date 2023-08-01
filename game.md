@@ -6,6 +6,12 @@ In our Number Guessing Game, you have the chance to test your intuition and gues
 
 Your score is calculated based on two factors: the number of attempts you make to guess the correct number and the time you take to crack the code. The quicker you guess with fewer attempts, the higher your score will be!
 
+### Arrows
+<ul>
+<li> If you enter a number and see the "UP" arrow it means the entered number is lower than the password. </li>
+<li> If you enter a number and see the "DOWN" arrow it means the entered number is higher than the password. </li>
+</ul>
+
 ### 1)  Number of Tries:
 <ul>
 <li>If you manage to guess the number in less than 10 tries, you'll be rewarded with a higher score.</li>
