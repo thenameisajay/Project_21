@@ -11,7 +11,8 @@ router.use(express.json());
 router.get("/check", async (req, res) => {
   const data = await leaderboardDao.checkData();
   if (data) {
-    const checkleaderboard = await leaderboardDao.getByDate(new Date());
+    const now = await leaderboardDao.getDate();
+    const checkleaderboard = await leaderboardDao.getByDate(now);
     if (checkleaderboard.leaderboard.length === 0) {
       for (let i = 0; i < 5; i++) {
         const newRank = {
@@ -32,7 +33,8 @@ router.get("/check", async (req, res) => {
 
 //get today leaderboard
 router.get("/today", async (req, res) => {
-  const data = await leaderboardDao.getByDate(new Date());
+  const now = await leaderboardDao.getDate();
+  const data = await leaderboardDao.getByDate(now);
   res.json(data);
 });
 
@@ -109,9 +111,9 @@ router.get("/getdate2", async (req, res) => {
 
 
 //calculate score
-const calculateScore = (numberOfTries) => {
+const calculateScore = async (numberOfTries) => {
   if (numberOfTries) {
-    const now = new Date();
+    const now = await leaderboardDao.getDate();
     // figure out how many seconds passed since the day started
     const secondsPassed =
       now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
