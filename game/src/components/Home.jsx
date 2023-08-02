@@ -6,7 +6,7 @@ function Home() {
   const [isDataValid, setIsDataValid] = useState(false);
 
   useEffect(() => {
-    fetch("https://project-21-lh2i.onrender.com/api/check")
+    fetch(`${process.env.REACT_APP_API_URL}/check`)
       .then((response) => response.json())
       .then((data) => {
         setIsDataValid(data);

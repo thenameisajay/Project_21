@@ -12,7 +12,7 @@ function ScoreHolderInput({ score, tries }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const response = await fetch(
-      "https://project-21-lh2i.onrender.com/api/push",
+      `${process.env.REACT_APP_API_URL}/push`,
       {
         method: "POST",
         headers: {

@@ -3,6 +3,7 @@ import Arrow from "../components/Arrow/Arrow";
 import Header from "../components/Headers/Header2";
 import InputArea from "../components/InputArea/InputArea";
 import Timer from "../components/Timer/Timer";
+
 function Play() {
   const [arrowData, setArrowData] = useState(null);
   const [fetchSuccess, setFetchSuccess] = useState(false);
@@ -11,7 +12,7 @@ function Play() {
   const fetchData = async (attempt = 1) => {
     try {
       const response = await fetch(
-        "https://project-21-lh2i.onrender.com/api/check"
+        `${process.env.REACT_APP_API_URL}/check`
       );
       const data = await response.json();
 

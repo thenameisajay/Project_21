@@ -4,7 +4,7 @@ import Instructions from "../components/Instructions";
 
 function How() {
   useEffect(() => {
-    fetch("https://project-21-lh2i.onrender.com/api/check")
+    fetch(`${process.env.REACT_APP_API_URL}/check`)
       .then((response) => response.json())
       .then((data) => {
         // Here you can handle the data that is returned from the server

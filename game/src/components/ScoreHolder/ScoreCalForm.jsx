@@ -7,7 +7,7 @@ function ScoreCalForm({ tries }) {
   useEffect(() => {
     const fetchScore = async () => {
       const response = await fetch(
-        "https://project-21-lh2i.onrender.com/api/score",
+        `${process.env.REACT_APP_API_URL}/score`,
         {
           method: "POST",
           headers: {

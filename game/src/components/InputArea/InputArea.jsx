@@ -67,7 +67,7 @@ function InputArea({ setArrowData }) {
     setIsLoading(true); // Set isLoading to true when the request starts
     try {
       const response = await fetch(
-        "https://project-21-lh2i.onrender.com/api/passwordCheck",
+        `${process.env.REACT_APP_API_URL}/passwordCheck`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
