@@ -97,14 +97,14 @@ router.post("/score", async (req, res) => {
 
 //getDate from database js
 router.get("/getdate1", async (req, res) => {
-  const data = await leaderboardDao.getDate();
-  res.json(data);
+  const today = new Date();
+  res.json(today);
 });
 
 //get date from node app
 router.get("/getdate2", async (req, res) => {
-  const today = new Date();
-  res.json(today);
+  const data = await leaderboardDao.getDate();
+  res.json(data);
 });
 
 
