@@ -30,12 +30,6 @@ router.get("/check", async (req, res) => {
   }
 });
 
-//get all leaderboard
-router.get("/", async (req, res) => {
-  const data = await leaderboardDao.getLeaderboard();
-  res.json(data);
-});
-
 //get today leaderboard
 router.get("/today", async (req, res) => {
   const data = await leaderboardDao.getByDate(new Date());
