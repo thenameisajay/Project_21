@@ -24,9 +24,9 @@ router.get("/check", async (req, res) => {
       }
     }
 
-    return true;
+    res.json(true);
   } else {
-    return false;
+    res.json(false);
   }
 });
 
