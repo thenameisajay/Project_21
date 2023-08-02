@@ -1,5 +1,6 @@
 # Dependency directories
 api/node_modules/
+game/node_modules/
 
 # Optional npm cache directory
 .npm
@@ -7,3 +8,5 @@ api/node_modules/
 # dotenv environment variable files
 .env
 api/package-lock.json
+game/package-lock.json
+```
