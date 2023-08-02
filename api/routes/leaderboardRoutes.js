@@ -18,7 +18,7 @@ router.get("/check", async (req, res) => {
         const newRank = {
           username: faker.internet.userName(),
           numberOfTries: 100,
-          score: Math.floor(Math.random() * 40000) + 50000,
+          score: Math.floor(Math.random() * 300000) + 100000,
         };
 
         const data = await leaderboardDao.pushLeaderboard(newRank);
