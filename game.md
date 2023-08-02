@@ -6,6 +6,12 @@ In our Number Guessing Game, you have the chance to test your intuition and gues
 
 Your score is calculated based on two factors: the number of attempts you make to guess the correct number and the time you take to crack the code. The quicker you guess with fewer attempts, the higher your score will be!
 
+### Arrows
+<ul>
+<li> If you enter a number and see the "UP" arrow it means the entered number is lower than the password. </li>
+<li> If you enter a number and see the "DOWN" arrow it means the entered number is higher than the password. </li>
+</ul>
+
 ### 1)  Number of Tries:
 <ul>
 <li>If you manage to guess the number in less than 10 tries, you'll be rewarded with a higher score.</li>
@@ -24,6 +30,7 @@ Your score is calculated based on two factors: the number of attempts you make t
 
 We believe that quick thinking and sharp instincts deserve to be rewarded! By incorporating the time element, we encourage players to make accurate guesses swiftly and efficiently. This adds an extra layer of excitement to the game and emphasizes the importance of making confident choices.
 
+
 ## How the Time Component Affects Your Score:
 
 The scoring formula is designed to balance the importance of both factors - number of tries and time taken. Here's how it works:
@@ -40,3 +47,13 @@ Remember, the leaderboard is updated daily, so you have a fresh chance to make i
 
 <br>
 Best of luck, and may the odds be in your favor!
+
+
+## Authors 
+ <ul>
+ <li>Furkan Tekinay </li>
+ <li> Ajay Pradeep Mahadeven</li>
+ </ul>
+
+## LICENSE 
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
