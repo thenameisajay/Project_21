@@ -29,7 +29,7 @@ function ScoreHolderInput({ score, tries }) {
     if (response.ok) {
       navigate("/scoreboard");
     } else {
-      console.log("Response Failed: ", response);
+     
     }
   }
 

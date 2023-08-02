@@ -7,7 +7,7 @@ function Scoreholder() {
   const location = useLocation(); // Get the current location object
   const tries = location.state?.tries; // Safely access the tries property from state
 
-  console.log(tries);
+
   if (tries === undefined || tries === null || tries === 0) {
     return (
       <>

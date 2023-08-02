@@ -58,7 +58,7 @@ function InputArea({ setArrowData }) {
   let userPassword = input1 + input2 + input3 + input4;
   userPassword = parseInt(userPassword, 10);
 
-  console.log(userPassword);
+ 
 
   const handleSubmit = async (e) => {
     setArrowData(null); // Every time the data is intialised.
@@ -76,7 +76,7 @@ function InputArea({ setArrowData }) {
       );
 
       const data = await response.json();
-      console.log(submitCount);
+      
       // Assuming data is a number (-1, 0, or 1)
       setArrowData(data); // Save the response data to state
       setIsLoading(false); // Set isLoading to false even if there is an error

@@ -8,7 +8,7 @@ function How() {
       .then((response) => response.json())
       .then((data) => {
         // Here you can handle the data that is returned from the server
-        console.log(data);
+        
       })
       .catch((error) => {
         // Here you can handle errors

@@ -7,7 +7,7 @@ function Scoreboard() {
     fetch("https://project-21-lh2i.onrender.com/api/check")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        
       })
       .catch((error) => {
         console.error("Error:", error);

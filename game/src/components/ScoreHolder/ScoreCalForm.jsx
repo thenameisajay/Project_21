@@ -19,7 +19,7 @@ function ScoreCalForm({ tries }) {
 
       if (response.ok) {
         const scoreData = await response.json();
-        console.log(scoreData);
+        
         setScore(scoreData);
       } else {
         console.error("Failed to fetch score");
