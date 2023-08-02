@@ -57,28 +57,43 @@ const getByDate = async (date) => {
 };
 //get by date
 const GodMode = async (date) => {
-  const leaderboard = await Leaderboard.findOne({
-    date: {
-      $gte: moment(date).startOf("day").toDate(),
-      $lte: moment(date).endOf("day").toDate(),
-    },
-  });
-  if (leaderboard) {
-    leaderboard.leaderboard.sort((a, b) => b.score - a.score);
+  // const leaderboard = await Leaderboard.findOne({
+  //   date: {
+  //     $gte: moment(date).startOf("day").toDate(),
+  //     $lte: moment(date).endOf("day").toDate(),
+  //   },
+  // });
+  // if (leaderboard) {
+  //   leaderboard.leaderboard.sort((a, b) => b.score - a.score);
+  // }
+
+  // // check the leaderboard leaderboard array if the number of tries os 100 then remove it
+  // leaderboard.leaderboard = leaderboard.leaderboard.filter(
+  //   (item) => item.numberOfTries !== 100
+  // );
+
+  // // Remove the "password" field from the leaderboard object
+  // const sanitizedLeaderboard = {
+  //   ...leaderboard.toObject(),
+  //   password: undefined,
+  // };
+
+  // return sanitizedLeaderboard;
+
+  //get all the data 
+  const leaderboard = await Leaderboard.find();
+
+  //remove the password in for loop
+  for (let i = 0; i < leaderboard.length; i++) {
+    leaderboard[i].password = undefined;
   }
 
-  // check the leaderboard leaderboard array if the number of tries os 100 then remove it
-  leaderboard.leaderboard = leaderboard.leaderboard.filter(
-    (item) => item.numberOfTries !== 100
-  );
+  //rank the date and latest should come first
+  leaderboard.sort((a, b) => b.date - a.date);
+  
 
-  // Remove the "password" field from the leaderboard object
-  const sanitizedLeaderboard = {
-    ...leaderboard.toObject(),
-    password: undefined,
-  };
-
-  return sanitizedLeaderboard;
+  //return the leaderboard
+  return leaderboard; 
   
 };
 

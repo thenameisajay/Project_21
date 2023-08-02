@@ -32,8 +32,7 @@ router.get("/check", async (req, res) => {
 
 //get today leaderboard
 router.get("/today", async (req, res) => {
-  const date = await leaderboardDao.getDate();
-  const data = await leaderboardDao.getByDate(date);
+  const data = await leaderboardDao.getByDate(new Date());
   res.json(data);
 });
 
