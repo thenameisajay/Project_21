@@ -3,7 +3,6 @@ import UpArrow from "./UpArrow"; // Import UpArrow component
 import DownArrow from "./DownArrow"; // Import DownArrow component
 
 function Arrow({ data }) {
-  console.log(data);
 
   if (data === -1) {
     return (
