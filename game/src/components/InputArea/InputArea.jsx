@@ -67,7 +67,7 @@ function InputArea({ setArrowData }) {
     setIsLoading(true); // Set isLoading to true when the request starts
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/passwordCheck`,
+        "/api/passwordCheck",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -12,7 +12,7 @@ function Play() {
   const fetchData = async (attempt = 1) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/check`
+        "/api/check"
       );
       const data = await response.json();
 

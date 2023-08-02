@@ -12,7 +12,7 @@ function ScoreHolderInput({ score, tries }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/push`,
+      "/api/push",
       {
         method: "POST",
         headers: {

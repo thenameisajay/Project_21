@@ -4,7 +4,7 @@ import Table from "../components/Tables/Table";
 
 function Scoreboard() {
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/check`)
+    fetch("/api/check")
       .then((response) => response.json())
       .then((data) => {
         
@@ -20,7 +20,7 @@ function Scoreboard() {
 
   useEffect(() => {
     const calculateTime = () => {
-      fetch(`${process.env.REACT_APP_API_URL}/getdate2`)
+      fetch("/api/getdate2")
         .then((response) => response.json())
         .then((data) => {
           let now = new Date(data); // Create a Date object from the returned string
@@ -46,7 +46,7 @@ function Scoreboard() {
   }, []);
 
   useEffect(() => {
-    fetch("https://project-21-lh2i.onrender.com/api/today")
+    fetch("/api/today")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
