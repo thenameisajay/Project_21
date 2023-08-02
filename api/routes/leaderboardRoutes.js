@@ -32,7 +32,8 @@ router.get("/check", async (req, res) => {
 
 //get today leaderboard
 router.get("/today", async (req, res) => {
-  const data = await leaderboardDao.getByDate(new Date());
+  const date = await leaderboardDao.getDate();
+  const data = await leaderboardDao.getByDate(date);
   res.json(data);
 });
 
@@ -97,8 +98,8 @@ router.post("/score", async (req, res) => {
 
 //getDate from database js
 router.get("/getdate1", async (req, res) => {
-  const today = new Date();
-  res.json(today);
+  const data = await leaderboardDao.getDate();
+  res.json(data);
 });
 
 //get date from node app
