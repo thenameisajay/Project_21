@@ -5,17 +5,22 @@ const connectDB = require("./database/connection");
 const leaderboardRoutes = require("./routes/leaderboardRoutes");
 const config = require("./config");
 const cors = require("cors");
+const path = require('path')
+const buildPath = path.join(__dirname, 'build')
+
+
 
 const app = express();
+app.use(express.static(buildPath))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/api", leaderboardRoutes);
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the API" });
-});
+app.get('/', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'))
+})
 
 // Connect to the database and start the server
 connectDB()
