@@ -13,7 +13,7 @@ router.get("/check", async (req, res) => {
   if (data) {
     const checkleaderboard = await leaderboardDao.getByDate(new Date());
     if (checkleaderboard.leaderboard.length === 0) {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 7; i++) {
         const newRank = {
           username: faker.name.firstName().slice(0, 11),
           numberOfTries: 100,
