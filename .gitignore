@@ -11,3 +11,5 @@ api/package-lock.json
 game/package-lock.json
 game/.env
 ```
+package-lock.json
+node_modules/.package-lock.json
