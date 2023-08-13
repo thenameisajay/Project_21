@@ -11,10 +11,10 @@ function Home() {
   useEffect(() => {
     // Retrieve the API URL from the environment variable, or default to 'http://localhost:3000'
       const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
-      console.log(process.env.REACT_APP_API_URL);
+
     // Use the API_URL to construct the endpoint
     const endpoint = `${API_URL}/api/check`;
-    console.log(endpoint);
+
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
