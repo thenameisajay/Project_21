@@ -3,8 +3,14 @@ import Header from "../components/Headers/Header3";
 import Table from "../components/Tables/Table";
 
 function Scoreboard() {
+     // Retrieve the API URL from the environment variable, or default to 'http://localhost:3000'
+     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+     
+  
   useEffect(() => {
-    fetch("/api/check")
+    // Use the API_URL to construct the endpoint
+    const endpoint = `${API_URL}/api/check`;
+    fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         
@@ -20,7 +26,9 @@ function Scoreboard() {
 
   useEffect(() => {
     const calculateTime = () => {
-      fetch("/api/getdate2")
+      const endpoint  = `${API_URL}/api/getdate2`;
+      console.log(endpoint);
+      fetch(endpoint)
         .then((response) => response.json())
         .then((data) => {
           let now = new Date(data); // Create a Date object from the returned string

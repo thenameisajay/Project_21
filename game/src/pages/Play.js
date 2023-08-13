@@ -10,12 +10,13 @@ function Play() {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async (attempt = 1) => {
+    // Retrieve the API URL from the environment variable, or default to 'http://localhost:3000'
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+    // Use the API_URL to construct the endpoint
+    const endpoint = `${API_URL}/api/check`;
     try {
-      const response = await fetch(
-        "/api/check"
-      );
+      const response = await fetch(endpoint);
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error);
       }
