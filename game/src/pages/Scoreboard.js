@@ -27,27 +27,41 @@ function Scoreboard() {
     const calculateTime = () => {
       const endpoint = `${API_URL}/api/getdate2`;
       fetch(endpoint)
-        .then((response) => response.json())
-        .then((data) => {
-          let now = new Date(data); 
-          let midnight = new Date(now);
-          midnight.setHours(24, 0, 0, 0); 
-          let diff = midnight - now; 
-          let diffHours = Math.floor(diff / (1000 * 60 * 60));
-          let diffMinutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-          let diffSeconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-          // Pad single digits with a zero
-          diffHours = String(diffHours).padStart(2, '0');
-          diffMinutes = String(diffMinutes).padStart(2, '0');
-          diffSeconds = String(diffSeconds).padStart(2, '0');
-
-          setTime(`${diffHours}:${diffMinutes}:${diffSeconds}`);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    };
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then((data) => {
+              // Validate data format (basic)
+              if (!data || typeof data !== 'string' || !data.includes('T')) {
+                  throw new Error('Invalid data format');
+              }
+  
+              let now = new Date(data);
+  
+              // Calculate UTC midnight
+              let midnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+              
+              let diff = midnight - now;
+  
+              let diffHours = Math.floor(diff / (1000 * 60 * 60));
+              let diffMinutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+              let diffSeconds = Math.floor((diff % (1000 * 60)) / 1000);
+  
+              // Pad single digits with a zero
+              diffHours = String(diffHours).padStart(2, '0');
+              diffMinutes = String(diffMinutes).padStart(2, '0');
+              diffSeconds = String(diffSeconds).padStart(2, '0');
+  
+              setTime(`${diffHours}:${diffMinutes}:${diffSeconds}`);
+          })
+          .catch((error) => {
+              console.error("Error:", error);
+          });
+  };
+  
 
     // Call calculateTime once immediately, then again every second
     calculateTime();
