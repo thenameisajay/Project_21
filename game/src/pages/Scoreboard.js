@@ -4,11 +4,10 @@ import Table from "../components/Tables/Table";
 
 function Scoreboard() {
      // Retrieve the API URL from the environment variable, or default to 'http://localhost:3000'
-     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
-     
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+    // Use the API_URL to construct the endpoint
   
   useEffect(() => {
-    // Use the API_URL to construct the endpoint
     const endpoint = `${API_URL}/api/check`;
     fetch(endpoint)
       .then((response) => response.json())
@@ -26,8 +25,7 @@ function Scoreboard() {
 
   useEffect(() => {
     const calculateTime = () => {
-      const endpoint  = `${API_URL}/api/getdate2`;
-      console.log(endpoint);
+      const endpoint = `${API_URL}/api/getdate2`;
       fetch(endpoint)
         .then((response) => response.json())
         .then((data) => {
@@ -54,7 +52,8 @@ function Scoreboard() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/today")
+    const endpoint = `${API_URL}/api/today`;
+    fetch(endpoint)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
