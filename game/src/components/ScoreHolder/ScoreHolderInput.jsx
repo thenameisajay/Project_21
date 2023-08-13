@@ -40,7 +40,6 @@ function ScoreHolderInput({ score, tries, time }) {
     event.preventDefault();
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
     const endpoint = `${API_URL}/api/push`;
-    console.log(typeof time);
     try {
       const response = await fetch(endpoint, {
         method: "POST",
