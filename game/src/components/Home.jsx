@@ -19,6 +19,7 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         setIsDataValid(data);
+        
         setIsLoaded(data);
       })
       .catch((error) => {
