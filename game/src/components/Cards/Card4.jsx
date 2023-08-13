@@ -13,32 +13,21 @@ function Card() {
         <MDBCard className="custom-card">
           <MDBCardBody>
             <MDBCardTitle className="custom-card-title">
-              How the Time Component Affects Your Score{" "}
+              Tips{" "}
               <span role="img" aria-label="Timer">
                 ⏲️
               </span>{" "}
             </MDBCardTitle>
             <MDBCardText className="custom-card-text">
-              The scoring formula is designed to balance the importance of both
-              factors - number of tries and time passed since the scoreboard is
-              reset (00:00). Here's how it works.
-              <ul>
-                <li>
-                  If you find the number in less than 10 tries, your score will
-                  be 1000000 points minus the number of seconds it took you to
-                  guess (1000000 / 86400) for each second.
-                </li>
-                <li>
-                  If your attempts are between 10 and 49, your score will be 90%
-                  of the above value.
-                </li>
-                <li>
-                  If it takes you 50 or more tries, your score will be 80% of
-                  the value obtained in the first case.
-                </li>
-              </ul>
-              Remember, the leaderboard is updated daily, so you have a fresh
-              chance to make it to the top every day!
+              <p>
+                <ul>
+                  <li> The <strong> ARROWS </strong> indicate whether you have to guess higher or lower</li>
+                  <li>Start early in the day to get the biggest time of day bonus.</li>
+                  <li>Try to guess quickly but also carefully. You want a balance of speed and accuracy.</li>
+                  <li>Remember, every 10 wrong guesses will reduce your score a bit. So, think before you guess!</li>
+                </ul>
+                <strong>Good luck, and have fun guessing the pin!</strong>
+              </p>
             </MDBCardText>
           </MDBCardBody>
         </MDBCard>

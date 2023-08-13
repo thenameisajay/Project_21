@@ -210,13 +210,9 @@ body {
   text-align: center; /* Center the title text */
 }
 
-ul {
-  list-style: none;
-  text-align: center;
-}
 
 ul li {
-  font-weight: 800;
+  text-align: start;
 }
 
 .custom-card-text {
@@ -224,7 +220,7 @@ ul li {
   color: black;
   font-size: 16px;
   padding: 10px;
-  text-align: center; /* Center the text content */
+  text-align: start; /* Center the text content */
 }
 
 h4 {
@@ -402,7 +398,8 @@ input[type="number"] {
 }
 
 .form-container .form-control.userName {
-  font-size: 1rem;
+  margin-top: 50px;
+  font-size: 1.5rem;
 }
 
 form-container.scoreholder {

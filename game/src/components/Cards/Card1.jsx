@@ -13,16 +13,16 @@ function Card() {
         <MDBCard className="custom-card">
           <MDBCardBody>
             <MDBCardTitle className="custom-card-title">
-              Introduction{" "}
+              Objective{" "}
               <span role="img" aria-label="Time">
                 💡
               </span>{" "}
             </MDBCardTitle>
             <MDBCardText className="custom-card-text">
-              You have the chance to test your intuition and guessing skills to
-              find the secret number. Not only is it a fun and exciting
-              challenge, but you also get to compete with other players to see
-              who can achieve the highest score on the Leaderboard.
+              <p>
+                Your goal is to <strong> GUESS </strong> a special <strong>4-digit pin </strong> every day.
+
+              </p>
             </MDBCardText>
           </MDBCardBody>
         </MDBCard>

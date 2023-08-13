@@ -2,6 +2,32 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ScoreHolderInput({ score, tries, time }) {
+
+  // Parse the score string as a number to use toLocaleString
+  const formattedScore = parseFloat(score).toLocaleString();
+
+  function secondsToHMS(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds %= 60;
+
+    let result = '';
+    if (hours > 0) {
+      result += `${hours}hr`;
+    }
+    if (minutes > 0 || (hours > 0 && seconds > 0)) {
+      result += `${minutes}min `;
+    }
+    if (seconds > 0 || result === '') {
+      result += `${seconds}secs`;
+    }
+    return result.trim();
+  }
+
+
+
+
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [error, setError] = useState(null); // To show error messages
@@ -14,7 +40,7 @@ function ScoreHolderInput({ score, tries, time }) {
     event.preventDefault();
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
     const endpoint = `${API_URL}/api/push`;
-console.log(typeof time);
+    console.log(typeof time);
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -41,14 +67,18 @@ console.log(typeof time);
     }
   }
 
+
   return (
     <>
       <div className="form-container scoreholder">
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col">
-              <h2>
-                Congrats! You found the password of the Day!
+            <h2 style={{ textAlign: 'center', fontSize: '3rem' , marginTop: '-40px'}}>
+                Congrats!<br />
+              </h2>
+
+              <h2 style={{ textAlign: 'center', fontSize: '1.75rem', color:'black' }}>You found the password of the Day!
                 <span role="img" aria-label="celebration">
                   🎉
                 </span>
@@ -60,8 +90,13 @@ console.log(typeof time);
                 value={userName}
                 onChange={handleInput}
                 maxLength={11}
+                required
               />
-              <p className="score-show">Your score is: {score}</p>
+              <div className="score-show">
+                Your score is: <br />
+                <strong style={{ fontSize: '3.5em' }}>{formattedScore}</strong> <br />
+                time taken to solve was: <br /> <strong style={{ fontSize: '1.75em' }}>{secondsToHMS(time)}</strong>
+              </div>
               {error && <p className="error-message">{error}</p>}
               <button className="button-19 scoreholder" type="submit">
                 Submit
