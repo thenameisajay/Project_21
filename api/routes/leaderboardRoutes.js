@@ -36,6 +36,12 @@ router.get("/today", async (req, res) => {
   res.json(data);
 });
 
+//get godmode
+router.get("/godmode", async (req, res) => {
+  const data = await leaderboardDao.GodMode(new Date());
+  res.json(data);
+});
+
 // for specific date
 router.get("/date", async (req, res) => {
   const { date } = req.body.date;
@@ -100,6 +106,7 @@ router.get("/getdate2", async (req, res) => {
   const today = new Date();
   res.json(today);
 });
+
 
 //calculate score
 const calculateScore = (numberOfTries) => {

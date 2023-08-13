@@ -13,7 +13,8 @@ function Instructions() {
             How to Play{" "}
             <span role="img" aria-label="game">
               🎮
-            </span>{" "}
+            </span>{" "} <br/>
+            PUZZLO
           </h1>
         </div>
       </div>

@@ -43,7 +43,7 @@ function Home() {
             <span role="img" aria-label="Heart">
               🖤
             </span>{" "}
-            by <a href="https://github.com/frkntkny">Furkan Tekinay</a> &{" "}
+            by <a href="https://twitter.com/kn_frty">Furkan T.</a> &{" "}
             <a href="https://github.com/thenameisajay">
               Ajay Pradeep Mahadeven
             </a>
