@@ -55,32 +55,7 @@ const getByDate = async (date) => {
   return sanitizedLeaderboard;
   
 };
-//get by date
-const GodMode = async (date) => {
-  const leaderboard = await Leaderboard.findOne({
-    date: {
-      $gte: moment(date).startOf("day").toDate(),
-      $lte: moment(date).endOf("day").toDate(),
-    },
-  });
-  if (leaderboard) {
-    leaderboard.leaderboard.sort((a, b) => b.score - a.score);
-  }
 
-  // check the leaderboard leaderboard array if the number of tries os 100 then remove it
-  leaderboard.leaderboard = leaderboard.leaderboard.filter(
-    (item) => item.numberOfTries !== 100
-  );
-
-  // Remove the "password" field from the leaderboard object
-  const sanitizedLeaderboard = {
-    ...leaderboard.toObject(),
-    password: undefined,
-  };
-
-  return sanitizedLeaderboard;
-  
-};
 
 
 // push into the leaderboard
@@ -92,7 +67,6 @@ const pushLeaderboard = async (newSubmission) => {
       $lte: moment(date).endOf("day").toDate(),
     },
   });
-  console.log(newSubmission);
   if (leaderboard) {
 
     leaderboard.leaderboard.push(newSubmission);
@@ -150,6 +124,5 @@ module.exports = {
   pushLeaderboard,
   checkPassword,
   getDate,
-  GodMode
   
 };
