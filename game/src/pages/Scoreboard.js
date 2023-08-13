@@ -29,13 +29,19 @@ function Scoreboard() {
       fetch(endpoint)
         .then((response) => response.json())
         .then((data) => {
-          let now = new Date(data); // Create a Date object from the returned string
+          let now = new Date(data); 
           let midnight = new Date(now);
-          midnight.setHours(24, 0, 0, 0); // Set the time to next midnight
-          let diff = midnight - now; // Get the difference in milliseconds
+          midnight.setHours(24, 0, 0, 0); 
+          let diff = midnight - now; 
           let diffHours = Math.floor(diff / (1000 * 60 * 60));
           let diffMinutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
           let diffSeconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+          // Pad single digits with a zero
+          diffHours = String(diffHours).padStart(2, '0');
+          diffMinutes = String(diffMinutes).padStart(2, '0');
+          diffSeconds = String(diffSeconds).padStart(2, '0');
+
           setTime(`${diffHours}:${diffMinutes}:${diffSeconds}`);
         })
         .catch((error) => {
