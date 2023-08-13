@@ -1,45 +1,36 @@
 # Welcome to the Number Guessing Game PROJECT_21!
 
-In our Number Guessing Game, you have the chance to test your intuition and guessing skills to find the secret number. Not only is it a fun and exciting challenge, but you also get to compete with other players to see who can achieve the highest score on the Leaderboard.
+## How to Play:
 
-## How is the Score Calculated?
+### Objective: Your goal is to guess a special 4-digit pin every day. You'll be scored based on:
 
-Your score is calculated based on two factors: the number of attempts you make to guess the correct number and the time you take to crack the code. The quicker you guess with fewer attempts, the higher your score will be!
+When you guess the pin during the day.
+How long you take to guess.
+How many tries you take to get it right.
+Scoring Details:
 
-### Arrows
-<ul>
-<li> If you enter a number and see the "UP" arrow, it means the entered number is lower than the password. </li>
-<li> If you enter a number and see the "DOWN" arrow, it means the entered number is higher than the password. </li>
-</ul>
+## Time of Day Bonus:
 
-### 1) Number of Tries:
-<ul>
-<li>If you manage to guess the number in less than 10 tries, you'll be rewarded with a higher score.</li>
-<li>If it takes you between 10 and 49 tries, you'll still get a good score, but it will be slightly lower.</li>
-<li>For 50 or more tries, the score will be lower than the above cases.</li>
-<li> If you do not guess the number correctly at all, your score will be even lower. </li>
-</ul>
+The game starts every day at midnight (00:00).
+The earlier you guess the pin in the day, the higher your bonus! For example, if you guess it at 1:00 AM, you get a bigger bonus than if you guess at 11:00 PM.
+Time Taken Bonus:
 
-### 2) Time Taken:
-<ul>
-<li>The game is exciting, but we also value your time. The quicker you find the correct number, the more points you'll earn.</li>
-<li>We measure the time from the start of the day (00:00:00) until you successfully guess the number. The number of seconds elapsed since the start of the day is used to calculate your score.</li>
-</ul>
+The faster you guess, the more points you get.
+If you take more than 30 seconds to guess, your points for this part will begin to decrease.
+ ## Number of Tries Penalty:
 
-## How the Time Component Affects Your Score:
+The fewer tries you take to guess the pin, the better.
+For every 10 additional tries, you'll lose some points. So, keep guessing smartly!
+## Winning the Game:
 
-The scoring formula is designed to balance the importance of both factors - number of tries and time taken. Here's how it works:
+Your score is the sum of the three parts above, and the highest possible score is 1,000,000.
+Each day brings a new pin and a new challenge. So, come back every day to see how well you can do!
 
-<ul>
-<li>If you find the number in less than 10 tries, your score will be 1,000,000 points minus the product of the number of seconds since the start of the day and the ratio of 1,000,000 to 86,400 (the total number of seconds in a day).</li>
-<li>If your attempts are between 10 and 49, your score will be 90% of the value calculated above.</li>
-<li>If it takes you 50 or more tries, your score will be 80% of the value calculated above.</li>
-<li>If you do not guess the number correctly at all, your score will be 50% of the value calculated in the first case.</li>
-</ul>
-
-Remember, the leaderboard is updated daily, so you have a fresh chance to make it to the top every day!
-
-Best of luck, and may the odds be in your favor!
+## Tips:
+Start early in the day to get the biggest time-of-day bonus.
+Try to guess quickly but also carefully. You want a balance of speed and accuracy.
+Remember, every 10 wrong guesses will reduce your score a bit. So, think before you guess!
+Good luck, and have fun guessing the pin!
 
 ## Authors 
 <ul>
