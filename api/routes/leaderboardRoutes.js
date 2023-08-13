@@ -4,14 +4,18 @@ const leaderboardDao = require("../dao/leaderboardDAO");
 const bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({ extended: false }));
 const { faker } = require("@faker-js/faker");
+const moment = require("moment");
 
 router.use(express.json());
 
 //check data if its exist
 router.get("/check", async (req, res) => {
   const data = await leaderboardDao.checkData();
+  console.log(moment.utc().toDate());
+ 
+
   if (data) {
-    const checkleaderboard = await leaderboardDao.getByDate(new Date());
+    const checkleaderboard = await leaderboardDao.getByDate(moment.utc().toDate());
     if (checkleaderboard.leaderboard.length === 0) {
       for (let i = 0; i < 7; i++) {
         const newRank = {
@@ -20,11 +24,9 @@ router.get("/check", async (req, res) => {
           timeTaken: 100, 
           score: Math.floor(Math.random() * 50001) + 50000,
         };
-
         const data = await leaderboardDao.pushLeaderboard(newRank);
       }
     }
-
     res.json(true);
   } else {
     res.json(false);
@@ -33,13 +35,15 @@ router.get("/check", async (req, res) => {
 
 //get today leaderboard
 router.get("/today", async (req, res) => {
-  const data = await leaderboardDao.getByDate(new Date());
+  console.log(moment.utc().toDate());
+  const data = await leaderboardDao.getByDate(moment.utc().toDate());
   res.json(data);
 });
 
 //get godmode
 router.get("/godmode", async (req, res) => {
-  const data = await leaderboardDao.GodMode(new Date());
+  console.log(moment.utc().toDate());
+  const data = await leaderboardDao.GodMode(moment.utc().toDate());
   res.json(data);
 });
 
@@ -63,7 +67,7 @@ router.post("/passwordCheck", async (req, res) => {
       res.json(0);
     }
   } else {
-    res.json({ message: "somethin went wrong" });
+    res.json({ message: "something went wrong" });
   }
 });
 
@@ -83,6 +87,7 @@ router.post("/push", async (req, res) => {
   res.json(data);
 });
 
+
 //show score
 router.post("/score", async (req, res) => {
   const { numberOfTries, timeTaken } = req.body;
@@ -98,7 +103,8 @@ router.get("/getdate1", async (req, res) => {
 
 //get date from node app
 router.get("/getdate2", async (req, res) => {
-  const today = new Date();
+  const today = moment.utc().toDate();
+  console.log(today);
   res.json(today);
 });
 
@@ -109,10 +115,11 @@ const calculateScore = (numberOfTries, timeTaken) => {
   const timeTakenWeight = 0.3;
   const timeTakenForADayWeight = 0.5;
   const numberOfTriesWeight = 0.2;
-
-  const now = new Date();
+  console.log(moment.utc().toDate());
+  const now = moment.utc().toDate();
   const secondsPassed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
   const timeTakenForADay = 86400 - secondsPassed;
+
 
   const timeTakenForADayScore =  maxScore * timeTakenForADayWeight * (1 / 86400 * timeTakenForADay)
   const numberOfTriesScore = maxScore * numberOfTriesWeight * (1 - Math.floor((numberOfTries - 1) / 10) * 0.05);

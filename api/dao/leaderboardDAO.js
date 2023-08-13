@@ -11,7 +11,7 @@ const getLeaderboard = async () => {
 // this is needs to make afteer pagee is loaded 
 const checkData = async () => {
   // get the current date 
-  const today = new Date();
+  const today = moment.utc().toDate();
   //check if its the same day with the database 
   const leaderboard = await Leaderboard.findOne({
     date: {
@@ -85,14 +85,16 @@ const GodMode = async (date) => {
 
 // push into the leaderboard
 const pushLeaderboard = async (newSubmission) => {
-  let date = new Date();
+  let date = moment.utc().toDate();
   let leaderboard = await Leaderboard.findOne({
     date: {
       $gte: moment(date).startOf("day").toDate(),
       $lte: moment(date).endOf("day").toDate(),
     },
   });
+  console.log(newSubmission);
   if (leaderboard) {
+
     leaderboard.leaderboard.push(newSubmission);
     await leaderboard.save();
   }
@@ -101,7 +103,7 @@ const pushLeaderboard = async (newSubmission) => {
 //check password
 const checkPassword = async (password) => {
   //get today password
-  const today = new Date();
+  const today = moment.utc().toDate();
   const leaderboard = await Leaderboard.findOne({
     date: {
       $gte: moment(today).startOf("day").toDate(),
@@ -125,7 +127,7 @@ const checkPassword = async (password) => {
 
 //return date
 const getDate = async () => {
-  const today = new Date();
+  const today = moment.utc().toDate();
   return today;
 };
  
