@@ -17,6 +17,7 @@ router.get("/check", async (req, res) => {
         const newRank = {
           username: faker.name.firstName().slice(0, 11),
           numberOfTries: 100,
+          timeTaken: 100, 
           score: Math.floor(Math.random() * 50001) + 50000,
         };
 
@@ -39,13 +40,6 @@ router.get("/today", async (req, res) => {
 //get godmode
 router.get("/godmode", async (req, res) => {
   const data = await leaderboardDao.GodMode(new Date());
-  res.json(data);
-});
-
-// for specific date
-router.get("/date", async (req, res) => {
-  const { date } = req.body.date;
-  const data = await leaderboardDao.getByDate(date);
   res.json(data);
 });
 
@@ -76,11 +70,12 @@ router.post("/passwordCheck", async (req, res) => {
 //push leaderboard
 router.post("/push", async (req, res) => {
   // useername , number of tries I will get
-  const { username, numberOfTries, score } = req.body;
+  const { username, numberOfTries,timeTaken, score } = req.body;
 
   const newRank = {
     username: username,
     numberOfTries: numberOfTries,
+    timeTaken: timeTaken,
     score: score,
   };
 
@@ -90,8 +85,8 @@ router.post("/push", async (req, res) => {
 
 //show score
 router.post("/score", async (req, res) => {
-  const { numberOfTries } = req.body;
-  const score = Math.floor(calculateScore(numberOfTries));
+  const { numberOfTries, timeTaken } = req.body;
+  const score = Math.floor(calculateScore(numberOfTries,timeTaken));
   res.json(score);
 });
 
@@ -109,25 +104,28 @@ router.get("/getdate2", async (req, res) => {
 
 
 //calculate score
-const calculateScore = (numberOfTries) => {
-  if (numberOfTries) {
-    const now = new Date();
-    // figure out how many seconds passed since the day started
-    const secondsPassed =
-      now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
+const calculateScore = (numberOfTries,timeTaken) => {
+  // if (numberOfTries) {
+  //   const now = new Date();
+  //   // figure out how many seconds passed since the day started
+  //   const secondsPassed =
+  //     now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
 
-    if (numberOfTries < 10) {
-      return (score = 1000000 - secondsPassed * (1000000 / 86400));
-    }
-    if (numberOfTries >= 10 && numberOfTries < 50) {
-      return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.9);
-    }
-    if (numberOfTries >= 50) {
-      return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.8);
-    }
-  } else {
-    return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.5);
-  }
+  //   if (numberOfTries < 10) {
+  //     return (score = 1000000 - secondsPassed * (1000000 / 86400));
+  //   }
+  //   if (numberOfTries >= 10 && numberOfTries < 50) {
+  //     return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.9);
+  //   }
+  //   if (numberOfTries >= 50) {
+  //     return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.8);
+  //   }
+  // } else {
+  //   return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.5);
+  // }
+  console.log(numberOfTries)
+  console.log(timeTaken)
+  return 1000000
 };
 
 module.exports = router;

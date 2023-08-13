@@ -130,13 +130,6 @@ const getDate = async () => {
 };
  
 
-
-
-
-
-
-
-
 //additional function for password generation
 const generatePassword = () => {
   const min = 0;
@@ -147,7 +140,6 @@ const generatePassword = () => {
 };
 
 
-console.log( generatePassword());
 
 module.exports = {
   getLeaderboard,
