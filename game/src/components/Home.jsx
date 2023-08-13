@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
+
+
 function Home() {
   const [isLoaded, setIsLoaded] = useState(true);
   const [isDataValid, setIsDataValid] = useState(false);
 
   useEffect(() => {
-    fetch( "/api/check")
-    
+    // Retrieve the API URL from the environment variable, or default to 'http://localhost:3000'
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
+    // Use the API_URL to construct the endpoint
+    const endpoint = `${API_URL}/api/check`;
+
+    fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         setIsDataValid(data);
+        
         setIsLoaded(data);
       })
       .catch((error) => {

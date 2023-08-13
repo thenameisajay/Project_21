@@ -4,6 +4,7 @@ const leaderboardDao = require("../dao/leaderboardDAO");
 const bodyParser = require("body-parser");
 router.use(bodyParser.urlencoded({ extended: false }));
 const { faker } = require("@faker-js/faker");
+const moment = require("moment");
 
 router.use(express.json());
 
@@ -11,19 +12,18 @@ router.use(express.json());
 router.get("/check", async (req, res) => {
   const data = await leaderboardDao.checkData();
   if (data) {
-    const checkleaderboard = await leaderboardDao.getByDate(new Date());
+    const checkleaderboard = await leaderboardDao.getByDate(moment.utc().toDate());
     if (checkleaderboard.leaderboard.length === 0) {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 7; i++) {
         const newRank = {
-          username: faker.internet.userName(),
+          username: faker.name.firstName().slice(0, 11),
           numberOfTries: 100,
-          score: Math.floor(Math.random() * 300000) + 100000,
+          timeTaken: 100, 
+          score: Math.floor(Math.random() * 50001) + 50000,
         };
-
         const data = await leaderboardDao.pushLeaderboard(newRank);
       }
     }
-
     res.json(true);
   } else {
     res.json(false);
@@ -32,22 +32,10 @@ router.get("/check", async (req, res) => {
 
 //get today leaderboard
 router.get("/today", async (req, res) => {
-  const data = await leaderboardDao.getByDate(new Date());
+  const data = await leaderboardDao.getByDate(moment.utc().toDate());
   res.json(data);
 });
 
-//get godmode
-router.get("/godmode", async (req, res) => {
-  const data = await leaderboardDao.GodMode(new Date());
-  res.json(data);
-});
-
-// for specific date
-router.get("/date", async (req, res) => {
-  const { date } = req.body.date;
-  const data = await leaderboardDao.getByDate(date);
-  res.json(data);
-});
 
 //check password
 router.post("/passwordCheck", async (req, res) => {
@@ -69,18 +57,19 @@ router.post("/passwordCheck", async (req, res) => {
       res.json(0);
     }
   } else {
-    res.json({ message: "somethin went wrong" });
+    res.json({ message: "something went wrong" });
   }
 });
 
 //push leaderboard
 router.post("/push", async (req, res) => {
   // useername , number of tries I will get
-  const { username, numberOfTries, score } = req.body;
+  const { username, numberOfTries,timeTaken, score } = req.body;
 
   const newRank = {
     username: username,
     numberOfTries: numberOfTries,
+    timeTaken: timeTaken,
     score: score,
   };
 
@@ -88,10 +77,11 @@ router.post("/push", async (req, res) => {
   res.json(data);
 });
 
+
 //show score
 router.post("/score", async (req, res) => {
-  const { numberOfTries } = req.body;
-  const score = Math.floor(calculateScore(numberOfTries));
+  const { numberOfTries, timeTaken } = req.body;
+  const score = Math.floor(calculateScore(numberOfTries,timeTaken));
   res.json(score);
 });
 
@@ -103,31 +93,28 @@ router.get("/getdate1", async (req, res) => {
 
 //get date from node app
 router.get("/getdate2", async (req, res) => {
-  const today = new Date();
+  const today = moment.utc().toDate();
   res.json(today);
 });
 
 
 //calculate score
-const calculateScore = (numberOfTries) => {
-  if (numberOfTries) {
-    const now = new Date();
-    // figure out how many seconds passed since the day started
-    const secondsPassed =
-      now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
+const calculateScore = (numberOfTries, timeTaken) => {
+  const maxScore = 1000000;
+  const timeTakenWeight = 0.3;
+  const timeTakenForADayWeight = 0.5;
+  const numberOfTriesWeight = 0.2;
+  const now = moment.utc().toDate();
+  const secondsPassed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+  const timeTakenForADay = 86400 - secondsPassed;
 
-    if (numberOfTries < 10) {
-      return (score = 1000000 - secondsPassed * (1000000 / 86400));
-    }
-    if (numberOfTries >= 10 && numberOfTries < 50) {
-      return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.9);
-    }
-    if (numberOfTries >= 50) {
-      return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.8);
-    }
-  } else {
-    return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.5);
-  }
+
+  const timeTakenForADayScore =  maxScore * timeTakenForADayWeight * (1 / 86400 * timeTakenForADay)
+  const numberOfTriesScore = maxScore * numberOfTriesWeight * (1 - Math.floor((numberOfTries - 1) / 10) * 0.05);
+  const timeTakenScore = maxScore * timeTakenWeight * (1 - timeTaken / 30 * 0.05);
+
+  return Math.round(timeTakenForADayScore + numberOfTriesScore + timeTakenScore);
 };
+
 
 module.exports = router;

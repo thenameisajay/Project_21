@@ -13,67 +13,39 @@ function Card() {
         <MDBCard className="custom-card">
           <MDBCardBody>
             <MDBCardTitle className="custom-card-title">
-              How is the Score Calculated?{" "}
+            Scoring Details?{" "}
               <span role="img" aria-label="Time">
                 ⌛
               </span>{" "}
             </MDBCardTitle>
             <MDBCardText className="custom-card-text">
-              Your score is calculated based on two factors: the number of
-              attempts you make to guess the correct number and the time you
-              take to crack the code. The quicker you guess with fewer attempts,
-              the higher your score will be!
-              <ul>
-                <li>
-                  If you enter a number and see the "UP" arrow it means the
-                  entered number is lower than the password.{" "}
-                </li>
-                <li>
-                  {" "}
-                  If you enter a number and see the "DOWN" arrow it means the
-                  entered number is higher than the password.{" "}
-                </li>
-              </ul>
-              <h4>
-                {" "}
+            <p> <strong>Time of Day Bonus:</strong>
+            <ul>
+              <li>The game starts every day at midnight (00:00).</li>
+              <li>The earlier you guess the pin in the day, the higher your bonus! For example, if you guess it at 1:00 AM, you get a bigger bonus than if you guess at 11:00 PM.</li>
+            </ul>
+            <strong>{" "}
                 Number of Tries{" "}
                 <span role="img" aria-label="emergency">
                   🚨
-                </span>{" "}
-              </h4>
-              <ul>
-                <li>
-                  If you manage to guess the number in less than 10 tries,
-                  you'll be rewarded with a higher score.{" "}
-                </li>
-                <li>
-                  {" "}
-                  If it takes you between 10 and 49 tries, you'll still get a
-                  good score, but it will be slightly lower.
-                </li>
-                <li>
-                  For 50 or more tries, the score will be lower than the above
-                  cases.
-                </li>
-              </ul>
-              <h4>
-                {" "}
+                </span>{" "}</strong>
+            <ul>
+              <li>The fewer tries you take to guess the pin, the better.</li>
+              <li>For every 10 additional tries, you'll lose some points. So, keep guessing smartly!</li>
+            </ul>
+            <strong> {" "}
                 Time Taken{" "}
                 <span role="img" aria-label="bomb">
                   💣
-                </span>{" "}
-              </h4>
-              <ul>
-                <li>
-                  {" "}
-                  The game is exciting, but we also value your time. The quicker
-                  you find the correct number, the more points you'll earn.
-                </li>
-                <li>
-                  We measure the time from the start of the day (00:00:00) until
-                  you successfully guess the number.
-                </li>
-              </ul>
+                </span>{" "} Bonus:</strong>
+ <ul>
+ <li>The faster you guess, the more points you get.</li>
+              <li>If you take more than 30 seconds to guess, your points for this part will begin to decrease.</li>
+ </ul>
+
+            </p>
+
+           
             </MDBCardText>
           </MDBCardBody>
         </MDBCard>

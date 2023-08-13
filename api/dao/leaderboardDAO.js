@@ -11,7 +11,7 @@ const getLeaderboard = async () => {
 // this is needs to make afteer pagee is loaded 
 const checkData = async () => {
   // get the current date 
-  const today = new Date();
+  const today = moment.utc().toDate();
   //check if its the same day with the database 
   const leaderboard = await Leaderboard.findOne({
     date: {
@@ -55,37 +55,12 @@ const getByDate = async (date) => {
   return sanitizedLeaderboard;
   
 };
-//get by date
-const GodMode = async (date) => {
-  const leaderboard = await Leaderboard.findOne({
-    date: {
-      $gte: moment(date).startOf("day").toDate(),
-      $lte: moment(date).endOf("day").toDate(),
-    },
-  });
-  if (leaderboard) {
-    leaderboard.leaderboard.sort((a, b) => b.score - a.score);
-  }
 
-  // check the leaderboard leaderboard array if the number of tries os 100 then remove it
-  leaderboard.leaderboard = leaderboard.leaderboard.filter(
-    (item) => item.numberOfTries !== 100
-  );
-
-  // Remove the "password" field from the leaderboard object
-  const sanitizedLeaderboard = {
-    ...leaderboard.toObject(),
-    password: undefined,
-  };
-
-  return sanitizedLeaderboard;
-  
-};
 
 
 // push into the leaderboard
 const pushLeaderboard = async (newSubmission) => {
-  let date = new Date();
+  let date = moment.utc().toDate();
   let leaderboard = await Leaderboard.findOne({
     date: {
       $gte: moment(date).startOf("day").toDate(),
@@ -93,6 +68,7 @@ const pushLeaderboard = async (newSubmission) => {
     },
   });
   if (leaderboard) {
+
     leaderboard.leaderboard.push(newSubmission);
     await leaderboard.save();
   }
@@ -101,7 +77,7 @@ const pushLeaderboard = async (newSubmission) => {
 //check password
 const checkPassword = async (password) => {
   //get today password
-  const today = new Date();
+  const today = moment.utc().toDate();
   const leaderboard = await Leaderboard.findOne({
     date: {
       $gte: moment(today).startOf("day").toDate(),
@@ -125,33 +101,21 @@ const checkPassword = async (password) => {
 
 //return date
 const getDate = async () => {
-  const today = new Date();
+  const today = moment.utc().toDate();
   return today;
 };
  
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 //additional function for password generation
 const generatePassword = () => {
-  const digits = new Set();
-  while (digits.size < 4) {
-    digits.add(Math.floor(Math.random() * 10));
-  }
-  return Array.from(digits).join("");
+  const min = 0;
+  const max = 9999;
+  const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  const final =  randomNum.toString().padStart(4, '0');
+  return Number(final);
 };
+
+
 
 module.exports = {
   getLeaderboard,
@@ -160,6 +124,5 @@ module.exports = {
   pushLeaderboard,
   checkPassword,
   getDate,
-  GodMode
   
 };

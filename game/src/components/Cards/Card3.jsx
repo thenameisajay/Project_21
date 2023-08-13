@@ -13,17 +13,18 @@ function Card() {
         <MDBCard className="custom-card">
           <MDBCardBody>
             <MDBCardTitle className="custom-card-title">
-              Why is Time a Factor?{" "}
+            Winning the Game{" "}
               <span role="img" aria-label="Time">
-                ⌛
+              🏆
               </span>{" "}
             </MDBCardTitle>
             <MDBCardText className="custom-card-text">
-              We believe that quick thinking and sharp instincts deserve to be
-              rewarded! By incorporating the time element, we encourage players
-              to make accurate guesses swiftly and efficiently. This adds an
-              extra layer of excitement to the game and emphasizes the
-              importance of making confident choices.
+    <p>
+      <ul>
+      <li>Your score is the sum of the three parts above, and the highest possible score is 1,000,000.</li>
+      <li>Each day brings a new pin and a new challenge. So, come back every day to see how well you can do!</li>
+      </ul>
+      </p>
             </MDBCardText>
           </MDBCardBody>
         </MDBCard>

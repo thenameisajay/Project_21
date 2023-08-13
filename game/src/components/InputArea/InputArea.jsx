@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
 function InputArea({ setArrowData }) {
   // Add isLoading state
@@ -58,7 +60,26 @@ function InputArea({ setArrowData }) {
   let userPassword = input1 + input2 + input3 + input4;
   userPassword = parseInt(userPassword, 10);
 
- 
+ // Setting up the timer for the score algorithm
+ const [startTime, setStartTime] = useState(null);
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
+
+  useEffect(() => {
+    setStartTime(Date.now()); // Start the timer when the component mounts
+
+    const intervalId = setInterval(() => {
+      if (startTime) {
+        const duration = Math.floor((Date.now() - startTime) / 1000);
+        setSecondsElapsed(duration);
+      }
+    }, 1000);
+
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [startTime]);
+
 
   const handleSubmit = async (e) => {
     setArrowData(null); // Every time the data is intialised.
@@ -66,8 +87,10 @@ function InputArea({ setArrowData }) {
     setSubmitCount(submitCount + 1); // Increase the submit count
     setIsLoading(true); // Set isLoading to true when the request starts
     try {
+      const endpoint = `${API_URL}/api/passwordCheck`;
       const response = await fetch(
-        "/api/passwordCheck",
+       
+        endpoint,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -91,8 +114,9 @@ function InputArea({ setArrowData }) {
         setSubmitCount(submitCount + 1); // Increase the submit count only if data is not 0
       }
       if (data === 0) {
-        navigate("/scoreholder", { state: { tries: submitCount } });
+        navigate("/scoreholder", { state: { tries: submitCount, time: secondsElapsed } });
         setSubmitCount(1); // Reset the no.of tries
+   
       }
     } catch (error) {
       console.error("Error:", error);
