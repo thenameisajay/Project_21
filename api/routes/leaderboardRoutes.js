@@ -15,7 +15,7 @@ router.get("/check", async (req, res) => {
     if (checkleaderboard.leaderboard.length === 0) {
       for (let i = 0; i < 5; i++) {
         const newRank = {
-          username: faker.internet.userName(),
+          username: faker.name.firstName().slice(0, 11),
           numberOfTries: 100,
           score: Math.floor(Math.random() * 300000) + 100000,
         };
