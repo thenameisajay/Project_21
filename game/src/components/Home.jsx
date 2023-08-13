@@ -6,8 +6,9 @@ function Home() {
   const [isDataValid, setIsDataValid] = useState(false);
 
   useEffect(() => {
-    fetch( "/api/check")
     
+      const endpoint = `${process.env.BASE_URL}/api/check`;
+       fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         setIsDataValid(data);
