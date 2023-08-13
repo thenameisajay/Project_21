@@ -5,7 +5,9 @@ import ScoreCalForm from "../components/ScoreHolder/ScoreCalForm";
 
 function Scoreholder() {
   const location = useLocation(); // Get the current location object
-  const tries = location.state?.tries; // Safely access the tries property from state
+   // Safely access the tries and time properties from state
+   const tries = location.state?.tries; 
+   const time = location.state?.time; 
 
 
   if (tries === undefined || tries === null || tries === 0) {
@@ -18,7 +20,8 @@ function Scoreholder() {
     return (
       <>
         <Header />
-        <ScoreCalForm tries={tries} />
+         {/* Passing both tries and time to ScoreCalForm */}
+         <ScoreCalForm tries={tries} time={time} />
       </>
     );
   }

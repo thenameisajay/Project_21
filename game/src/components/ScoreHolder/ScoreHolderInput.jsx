@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ScoreHolderInput({ score, tries }) {
+function ScoreHolderInput({ score, tries, time }) {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
+  const [error, setError] = useState(null); // To show error messages
 
   function handleInput(event) {
     setUserName(event.target.value);
@@ -11,9 +12,11 @@ function ScoreHolderInput({ score, tries }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await fetch(
-      "/api/push",
-      {
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+    const endpoint = `${API_URL}/api/push`;
+console.log(typeof time);
+    try {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -21,15 +24,20 @@ function ScoreHolderInput({ score, tries }) {
         body: JSON.stringify({
           username: userName,
           numberOfTries: tries,
-          score: score
+          timeTaken: time,
+          score: score,
         })
-      }
-    );
+      });
 
-    if (response.ok) {
-      navigate("/scoreboard");
-    } else {
-     
+      if (response.ok) {
+        navigate("/scoreboard");
+      } else {
+        const errData = await response.json();
+        setError(errData.message || "Failed to submit score.");
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+      console.error(err);
     }
   }
 
@@ -53,8 +61,9 @@ function ScoreHolderInput({ score, tries }) {
                 onChange={handleInput}
                 maxLength={11}
               />
-              <p className="score-show"> Your score is: {score}</p>
-              <button className="button-19 scoreholder" onClick={handleSubmit}>
+              <p className="score-show">Your score is: {score}</p>
+              {error && <p className="error-message">{error}</p>}
+              <button className="button-19 scoreholder" type="submit">
                 Submit
               </button>
             </div>

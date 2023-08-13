@@ -251,8 +251,32 @@ h4 {
   background-color: #fdae05;
   border-radius: 10px;
   border-bottom: 3px solid black;
-
+ text-align: end;
   color: black;
+}
+.column-2{
+  text-align: start !important;
+}
+
+#username-id{
+  text-align: start;
+}
+
+.score-1{
+  font-size: 1.5rem;
+ 
+}
+
+.score-2 {
+  font-size: 1.35rem;
+}
+
+.score-3 {
+  font-size: 1.2rem;
+}
+
+.score-custom{
+ color: red;
 }
 
 .timer {

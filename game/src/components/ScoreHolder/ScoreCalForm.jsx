@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import ScoreHolderInput from "./ScoreHolderInput";
 
-function ScoreCalForm({ tries }) {
+function ScoreCalForm({ tries, time }) {
   const [score, setScore] = useState(null);
 
   useEffect(() => {
+    // Retrieve the API URL from the environment variable, or default to 'http://localhost:3000'
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
     const fetchScore = async () => {
+      const endpoint = `${API_URL}/api/score`;
       const response = await fetch(
-        "/api/score",
+        endpoint,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ numberOfTries: tries })
+          body: JSON.stringify({ numberOfTries: tries, timeTaken: time })
         }
       );
 
@@ -27,11 +30,11 @@ function ScoreCalForm({ tries }) {
     };
 
     fetchScore();
-  }, [tries]);
+  }, [tries, time]);
 
   return (
     <>
-      <ScoreHolderInput score={score} tries={tries} />
+      <ScoreHolderInput score={score} tries={tries} time={time} />
     </>
   );
 }
