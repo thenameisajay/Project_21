@@ -104,28 +104,23 @@ router.get("/getdate2", async (req, res) => {
 
 
 //calculate score
-const calculateScore = (numberOfTries,timeTaken) => {
-  // if (numberOfTries) {
-  //   const now = new Date();
-  //   // figure out how many seconds passed since the day started
-  //   const secondsPassed =
-  //     now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
+const calculateScore = (numberOfTries) => {
+  const maxScore = 1000000;
+  const timeTakenWeight = 0.5;
+  const timeTakenToSolveWeight = 0.3;
+  const numberOfTriesWeight = 0.2;
 
-  //   if (numberOfTries < 10) {
-  //     return (score = 1000000 - secondsPassed * (1000000 / 86400));
-  //   }
-  //   if (numberOfTries >= 10 && numberOfTries < 50) {
-  //     return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.9);
-  //   }
-  //   if (numberOfTries >= 50) {
-  //     return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.8);
-  //   }
-  // } else {
-  //   return (score = (1000000 - secondsPassed * (1000000 / 86400)) * 0.5);
-  // }
-  console.log(numberOfTries)
-  console.log(timeTaken)
-  return 1000000
+  const now = new Date();
+  const secondsPassed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+  const timeTaken = 86400 - secondsPassed;
+
+  const timeTakenScore = maxScore * timeTakenWeight * (1 - timeTaken / 86400);
+  const timeTakenToSolveScore = maxScore * timeTakenToSolveWeight * (1 - timeTaken / 86400);
+  const numberOfTriesScore = maxScore * numberOfTriesWeight * (1 - numberOfTries / 50);
+
+  return Math.round(timeTakenScore + timeTakenToSolveScore + numberOfTriesScore);
 };
+
+
 
 module.exports = router;
