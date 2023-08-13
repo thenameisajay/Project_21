@@ -137,21 +137,17 @@ const getDate = async () => {
 
 
 
-
-
-
-
-  
-
-
 //additional function for password generation
 const generatePassword = () => {
-  const digits = new Set();
-  while (digits.size < 4) {
-    digits.add(Math.floor(Math.random() * 10));
-  }
-  return Array.from(digits).join("");
+  const min = 0;
+  const max = 9999;
+  const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  const final =  randomNum.toString().padStart(4, '0');
+  return Number(final);
 };
+
+
+console.log( generatePassword());
 
 module.exports = {
   getLeaderboard,
