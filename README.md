@@ -1,4 +1,4 @@
-# Project_21
+# Puzzlo
 
 ## Prepared by:
 - [x] [Furkan Tekinay]
