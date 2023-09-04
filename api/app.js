@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 // Define a catch-all route to serve the React app's HTML file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(buildPath, 'index.html'))
 });
 
 
