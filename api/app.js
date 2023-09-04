@@ -29,6 +29,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'))
 })
 
+// Define a catch-all route to serve the React app's HTML file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'))
+});
+
 
 // Opening the server on port 3000 and logging the port number to the console.
 const port = process.env.PORT || 3000;
