@@ -1,11 +1,11 @@
-# Project_21
+# Puzzlo
 
 ## Prepared by:
 - [x] [Furkan Tekinay]
 - [x] [Ajay Pradeep Mahadeven]
 
 ## Project Description:
--  [Project_21 Game] is a AWESOME number guessing game. ONLY FOR SMART PEOPLE. :)
+-  [Project_21 Game] is an AWESOME number guessing game.
 
 ## How to run the code:
 - cd api
@@ -18,7 +18,7 @@
 - show dbs
 - use project_21
 - show collections
-- db.commectionname.find() 
+- db.connectionname.find() 
 
 ## delete database
 - db.dropDatabase()
